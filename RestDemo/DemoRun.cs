@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RestDemo
 {
-    
+
     class DemoRun
     {
         public const string API_MY_ASSET = "/api/v1/asset/userAssetInfo";
