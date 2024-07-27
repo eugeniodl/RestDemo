@@ -79,7 +79,7 @@ namespace RestDemo
             {
                 request.AddJsonBody(jsonData);
             }
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)192 | (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
             return client.Execute(request).Content;
         }
 
