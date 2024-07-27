@@ -28,7 +28,7 @@ namespace RestDemo
         /// <returns>响应的字符串结果</returns>
         public static string SendPost(string api, Dictionary<string, string> dataDic)
         {
-            return SendPostRequest(api,dataDic,Method.POST);
+            return SendPostRequest(api, dataDic, Method.POST);
         }
 
         /// <summary>
@@ -48,19 +48,19 @@ namespace RestDemo
         /// <param name="dataDic">post数据的data部分</param>
         /// <param name="method">请求方式</param>
         /// <returns>响应的字符串结果</returns>
-        private static string SendPostRequest(string api,Dictionary<string, string> dataDic, Method method)
+        private static string SendPostRequest(string api, Dictionary<string, string> dataDic, Method method)
         {
             var commonDic = GetCommon();
             if (dataDic == null)
             {
                 dataDic = new Dictionary<string, string>(0);
             }
-            var sign = GetSign(commonDic,dataDic);
-            commonDic.Add("sign",sign);
-            var postJson = new Dictionary<string,Object>();
-            postJson.Add("common",commonDic);
+            var sign = GetSign(commonDic, dataDic);
+            commonDic.Add("sign", sign);
+            var postJson = new Dictionary<string, Object>();
+            postJson.Add("common", commonDic);
             postJson.Add("data", dataDic);
-            return DoSend(api,postJson,method);
+            return DoSend(api, postJson, method);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace RestDemo
         /// <param name="jsonData">post数据的data部分</param>
         /// <param name="method">请求方式</param>
         /// <returns>响应的字符串结果</returns>
-        private static string DoSend(string api,Dictionary<string,Object> jsonData,Method method)
+        private static string DoSend(string api, Dictionary<string, Object> jsonData, Method method)
         {
             RestClient client = new RestClient(API_HOST);
             var url = API_URL_PREFIX + api;
@@ -89,7 +89,7 @@ namespace RestDemo
         /// <returns>common参数</returns>
         private static Dictionary<string, string> GetCommon()
         {
-            var commonDic = new Dictionary<string,string>(3);
+            var commonDic = new Dictionary<string, string>(3);
             commonDic.Add("accesskey", ACCESS_KEY);
             commonDic.Add("timestamp", Convert.ToString((DateTime.Now.Ticks - DATE_TIME_1970) / 10000));
             return commonDic;
@@ -117,7 +117,7 @@ namespace RestDemo
                 sortDic.Add(commonPair.Key, commonPair.Value);
             }
             //将data参数放入有序dic
-            if (data!=null)
+            if (data != null)
             {
                 foreach (var dataPair in data)
                 {
@@ -135,7 +135,7 @@ namespace RestDemo
             }
             return MD5Encrypt(signSourceBuilder.ToString().TrimEnd('&'));
         }
-        
+
 
         /// <summary>
         /// 给一个字符串进行MD5加密
@@ -151,7 +151,7 @@ namespace RestDemo
             {
                 var hex2 = result[i].ToString("x");
                 //32位md5，单字节1位时需补0
-                if (hex2.Length<2)
+                if (hex2.Length < 2)
                 {
                     hex2 = "0" + hex2;
                 }
